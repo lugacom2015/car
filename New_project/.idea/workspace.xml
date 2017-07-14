@@ -12,6 +12,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file leaf-file-name="authScript.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PHP-scripts/authScript.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -23,11 +24,25 @@
                 <marker date="1500039287083" expanded="true" signature="167:228" ph="SELECT passw... users" />
                 <marker date="1500039287083" expanded="true" signature="167:241" ph="SELECT passw... users" />
                 <marker date="1500039287083" expanded="true" signature="167:242" ph="SELECT passw... users" />
+=======
+      <file leaf-file-name="authScript.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PHP-scripts/authScript.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="86" lean-forward="false" selection-start-line="3" selection-start-column="86" selection-end-line="3" selection-end-column="86" />
+              <folding>
+                <marker date="1499950829878" expanded="true" signature="167:193" ph="SELECT passw... users" />
+                <marker date="1499950829878" expanded="true" signature="167:206" ph="SELECT passw... users" />
+                <marker date="1499950829878" expanded="true" signature="167:228" ph="SELECT passw... users" />
+                <marker date="1499950829878" expanded="true" signature="167:241" ph="SELECT passw... users" />
+                <marker date="1499950829878" expanded="true" signature="167:242" ph="SELECT passw... users" />
+>>>>>>> fixed of shadows on the background
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="Authorization.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Html-pages/Authorization.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -43,6 +58,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
               <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+=======
+      <file leaf-file-name="connectScript.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PHP-scripts/connectScript.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+>>>>>>> fixed of shadows on the background
               <folding />
             </state>
           </provider>
@@ -54,7 +76,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/PHP-scripts/authScript.php" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Html-pages/Authorization.php" />
+=======
+>>>>>>> fixed of shadows on the background
         <option value="$PROJECT_DIR$/PHP-scripts/connectScript.php" />
       </list>
     </option>
@@ -67,8 +92,13 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="36" />
     <option name="y" value="10" />
+=======
+    <option name="x" value="-149" />
+    <option name="y" value="41" />
+>>>>>>> fixed of shadows on the background
     <option name="width" value="1346" />
     <option name="height" value="728" />
   </component>
@@ -124,6 +154,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="New_project" />
@@ -138,6 +169,8 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+=======
+>>>>>>> fixed of shadows on the background
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -160,10 +193,14 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="JavaScript Debug.Authorization.php">
     <configuration default="false" name="Authorization.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/New_project/Html-pages/Authorization.php">
       <method />
     </configuration>
+=======
+  <component name="RunManager">
+>>>>>>> fixed of shadows on the background
     <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
       <PhpTestRunnerSettings />
       <method />
@@ -225,6 +262,7 @@
       <recursive>false</recursive>
       <method />
     </configuration>
+<<<<<<< HEAD
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.Authorization.php" />
     </list>
@@ -233,6 +271,8 @@
         <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.Authorization.php" />
       </list>
     </recent_temporary>
+=======
+>>>>>>> fixed of shadows on the background
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -244,15 +284,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1499936106192</updated>
+<<<<<<< HEAD
       <workItem from="1499936113693" duration="5366000" />
+=======
+      <workItem from="1499936113693" duration="3643000" />
+>>>>>>> fixed of shadows on the background
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="5366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="36" y="10" width="1346" height="728" extended-state="0" />
+=======
+    <option name="totallyTimeSpent" value="3643000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-149" y="41" width="1346" height="728" extended-state="0" />
+    <editor active="true" />
+>>>>>>> fixed of shadows on the background
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962406" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -284,16 +336,24 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Html-pages/Authorization.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+=======
+    <entry file="file://$PROJECT_DIR$/PHP-scripts/connectScript.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+>>>>>>> fixed of shadows on the background
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PHP-scripts/authScript.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="0">
           <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
           <folding>
@@ -302,10 +362,21 @@
             <marker date="1500039287083" expanded="true" signature="167:228" ph="SELECT passw... users" />
             <marker date="1500039287083" expanded="true" signature="167:241" ph="SELECT passw... users" />
             <marker date="1500039287083" expanded="true" signature="167:242" ph="SELECT passw... users" />
+=======
+        <state relative-caret-position="51">
+          <caret line="3" column="86" lean-forward="false" selection-start-line="3" selection-start-column="86" selection-end-line="3" selection-end-column="86" />
+          <folding>
+            <marker date="1499950829878" expanded="true" signature="167:193" ph="SELECT passw... users" />
+            <marker date="1499950829878" expanded="true" signature="167:206" ph="SELECT passw... users" />
+            <marker date="1499950829878" expanded="true" signature="167:228" ph="SELECT passw... users" />
+            <marker date="1499950829878" expanded="true" signature="167:241" ph="SELECT passw... users" />
+            <marker date="1499950829878" expanded="true" signature="167:242" ph="SELECT passw... users" />
+>>>>>>> fixed of shadows on the background
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/PHP-scripts/connectScript.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -314,5 +385,7 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> fixed of shadows on the background
   </component>
 </project>
