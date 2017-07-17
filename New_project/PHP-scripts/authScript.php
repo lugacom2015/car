@@ -8,12 +8,14 @@
     {
         if ($userInfo[2]==FALSE)//проверка является ли админом пользователь
         {
-            header("Location: ../html-pages/request.php?id=".$userInfo[0]);
+            header("Location: ../html-pages/Application.php?id=".$userInfo[0]);
+            //echo "Введено правильное сочетание логин/пароль";
             exit;
         }
         else
         {
-            header("Location: ../html-pages/admin.php");
+            //header("Location: ../html-pages/admin.php");
+            echo "Введено правильное сочетание логин/пароль";
             exit;
         }
     }

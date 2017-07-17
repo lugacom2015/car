@@ -20,10 +20,10 @@ a:hover
 
 .mid
 {
-	width: 450px;
+	width: 700px;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: 250px;
+	padding-top: 200px;
 	text-align: center;
 }
 
@@ -34,21 +34,27 @@ form
 
 input
 {
-	width: 300px;
-	height: 45px;
-	font-size: 18px;
+	width: 250px;
+	height: 40px;
+	font-size: 17px;
 	margin-top: 25px;
-	border-radius: 40px 10px;
 	/*padding-left: 40px;
 	padding-right: 15px;*/
-	transition: all 1s;
 	outline: none;
 	text-align: center;
+	border-radius: 13px;
+	transition: all 1s;
+}
+
+label
+{
+	font-size: 20px;
+
 }
 
 button
 {
-	padding: 13px 30px;
+	padding: 11px 25px;
 	margin: 5px 0 5px 0;
 	font-size: 15px;
 	color: #fff;
@@ -56,9 +62,9 @@ button
 	border: none;
 	border-radius: 13em/3em;
 	margin-top: 25px;
+	outline: none;
 	border: 2px solid #d0e4ed;
 	transition: all 1s;
-	outline: none;
 }
 
 button:hover
@@ -69,12 +75,6 @@ button:hover
 	cursor: pointer;
 	border: 2px solid #06a18d;
 }
-.error
-{
-	font-size: 16px;
-	color: #800000;
-}
-
 
 input:hover
 {
@@ -82,3 +82,41 @@ input:hover
 	transition: all 0.5s;
 }
 
+.date
+{
+	width: 150px;
+	cursor: pointer;
+}
+
+.time
+{
+	width: 100px;
+	cursor: pointer;
+}
+
+.endpoint
+{
+	width: 180px;
+	height: 30px;
+	font-size: 15px;
+	margin-top: 25px;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 1s;
+}
+
+.endpoint:hover
+{
+	box-shadow: 0 0 6px 5px rgba(111,200,223, 0.35);
+	transition: all 0.5s;
+}
+
+select
+{
+	outline: none;
+}
+
+p
+{
+	font-size: 18px;
+}
