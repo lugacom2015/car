@@ -1,3 +1,8 @@
+<?php
+	include_once('../PHP-scripts/connectScript.php');
+	$id = $_GET['id'];
+	$send = $_GET['s'];
+?>
 <html>
 <head>
 	<title>Заявка</title>
@@ -8,36 +13,67 @@
   	<link rel = "stylesheet" type="text/css" href = "../Css-files/jquery.timepicker.css" />
   	<script type = "text/javascript" src = "../Java_Script/JQuery/bootstrap-datepicker.js"></script>
   	<link rel="stylesheet" type="text/css" href="../Css-files/bootstrap-datepicker.css" />
-  	<script type = "text/javascript" src = "../Java_Script/JQuery/site.js"></script>
-  	<link rel = "stylesheet" type="text/css" href = "../Css-files/lib/site.css" />
 </head>
 <body>
 	<div class = "mid">
-		<form method = "POST">
+		<form action="../PHP-scripts/request.php" name="auth" method="post">
 			<div>
 				<label>Заявка</label>
 			</div>
 			<div>
-				<input type = "text" name = "username" value = "Имя пользователя" readonly tabIndex="-1" disabled="disabled">
+				<?php
+					echo "<input type = 'text' name = 'username' value = '";
+					$query = mysqli_query($dbConnection, "SELECT * FROM user where id = '".$id."'");
+					while ($result = mysqli_fetch_array($query)) 
+					{
+						echo
+						$result['surname']. " ".
+						$result['name']{0}. ".".
+						$result['patronymic']{0};
+					}
+					echo "'";
+					echo "readonly tabIndex='-1' disabled>";
+				?>
 			</div>
 			<div>
 				<p id="datepairExample">
-				    <input type="text" class="date start" required="required" value="" />
-				    <input type="text" class="time start" required="required" value="" /> до
-				    <input type="text" class="time end" required="required" value="" />
-				    <input type="text" class="date end" required="required" value="" />
+				    <input type="text" name="ds" class="date start" required="required" value="" />
+				    <input type="text" name="ts" class="time start" required="required" value="" /> до
+				    <input type="text" name="tf" class="time end" required="required" value="" />
+				    <input type="text" name="df" class="date end" required="required" value="" />
 				</p>
 			</div>
+			<?php
+				echo "<input class='id' name ='id' value = '".$id."'>";
+			?>
 			<div>
 				<select name = "endpoint" class="endpoint">
-					<option disabled>Выберите город</option>
-					<option>Антрацит</option>
-					<option selected="selected">Луганск</option>
-					<option>Краснодон</option>
+				<option disabled>Выберите город</option>
+					<?php						
+						$result = mysqli_query($dbConnection, "select * from `Direction` order by `id`");
+				    	
+						/*$data = $dbConnection->prepare("select * from `Direction` order by `id` ");
+						$data->execute();
+						$sql = $data->fetchAll();*/
+						
+						echo "select * from `Direction` order by `id`";
+				        while ($row = mysqli_fetch_assoc($result)) {
+				        echo '<option value="'.$row['id'].'">'.$row['destination'].'</option>';
+				        }				
+					?>									
 				</select>
 			</div>
+			<?php
+				if($send != 0)
+				{
+					$query = mysqli_query($dbConnection, "SELECT * FROM request_first ORDER BY id DESC LIMIT 1");
+					$result = mysqli_fetch_assoc($query);
+					echo "<p class = 'add'>Заявка успешно отправлена</p>";
+					echo "<p class = 'add'>Код заявки: ".$result['id']."</p>";
+				}
+			?>
 			<div>
-					<button type = "submit" name = "send">Отправить</button>
+				<button type = "submit" name = "send">Отправить</button>
 			</div>
 			<script>
 	    		$('#datepairExample .time').timepicker({

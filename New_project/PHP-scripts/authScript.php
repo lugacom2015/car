@@ -1,5 +1,6 @@
 <?php
 	include "connectScript.php";
+    $send = 0;
     $authQuery=$dbConnection
         //запрос на выборку из БД, имена таблиц и полей не конечные и могут изменяться
         ->query("SELECT id,password,admin FROM user WHERE login='".$_POST["username"]."'");
@@ -8,7 +9,7 @@
     {
         if ($userInfo[2]==FALSE)//проверка является ли админом пользователь
         {
-            header("Location: ../html-pages/request.php?id=".$userInfo[0]);
+            header("Location: ../html-pages/Application.php?id=".$userInfo[0]."&s=".$send);
             exit;
         }
         else
@@ -19,6 +20,7 @@
     }
     else
     {
-        echo "Введено неправильное сочетание логин/пароль";
+        //echo "Введено неправильное сочетание логин/пароль";
+        header("Location: ../html-pages/Authorization.php");
     }
 ?>

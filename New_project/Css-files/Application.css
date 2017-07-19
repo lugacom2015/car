@@ -99,7 +99,7 @@ input:hover
 	width: 180px;
 	height: 30px;
 	font-size: 15px;
-	margin-top: 25px;
+	margin-top: 15px;
 	border-radius: 10px;
 	cursor: pointer;
 	transition: all 1s;
@@ -120,3 +120,17 @@ p
 {
 	font-size: 18px;
 }
+
+ .id 
+ {
+  visibility: hidden;
+  margin: 0;
+  height: 20px;
+ }
+
+ .add
+ {
+ 	color: #228B22;
+ 	margin-top: 10px;
+ 	margin-bottom: 0;
+ }
