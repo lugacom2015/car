@@ -14,7 +14,7 @@
         }
         else
         {
-            header("Location: ../html-pages/admin.php");
+            header("Location: ../html-pages/Admin.php");
             exit;
         }
     }
