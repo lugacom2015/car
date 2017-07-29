@@ -13,7 +13,6 @@
   	<link rel = "stylesheet" type="text/css" href = "../Css-files/jquery.timepicker.css" />
   	<script type = "text/javascript" src = "../Java_Script/JQuery/bootstrap-datepicker.js"></script>
   	<link rel="stylesheet" type="text/css" href="../Css-files/bootstrap-datepicker.css" />
-  	<script type = "text/javascript" src = "../Java_Script/JQuery/site.js"></script>
 </head>
 <body>
 	<div class = "mid">

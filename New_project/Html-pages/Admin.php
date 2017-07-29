@@ -17,7 +17,13 @@
 </head>
 <body>
 	<div class = "mid">
-		<form action="../Html-pages/Authorization.php" name="auth" method="post">
+		<form action = "<?php echo $_SERVER['PHP_SELF']; ?>" name="auth" method="post">
+		<?php
+				if(isset($_POST['']))  
+				{
+					 header("Location: ../PHP-scripts/exit.php");
+				}
+			?>
 		<div>
 			<p id="datepairExample">
 			    <input type="text" name="ds" class="date start" value="" />
@@ -37,6 +43,7 @@
 						<th>Машина</th>
 						<th>Водитель</th>
 						<th>Примечание</th>
+						<th>Сохранить</th>
 					</tr>
 					<?php
 						$a = mysqli_query($dbConnection, "SELECT COUNT(1) FROM request_first");
@@ -48,7 +55,7 @@
 		                     }		           
 					?>
 		</table>
-		<button type = "submit" name = "save" class="save">Сохранить</button>
+		<!--<button type = "submit" name = "save" class="save">Сохранить</button>-->
 		<script>
 	    		$('#datepairExample .time').timepicker({
 	       		 	'showDuration': true,

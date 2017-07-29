@@ -59,5 +59,11 @@
                         echo "<textarea>";
                         echo "</textarea>";
                         echo "</td>";
+                        echo "<td class = 'savetd'>";
+                       // if(/*Зявка не отредактирована*/)
+                                echo "<button type = 'submit' name = 'save' class = 'saved'disabled>Сохранено</button>";
+                        //else (/*Заявка отредактирована*/)
+                                //echo "<button type = 'submit' name = 'save' class = 'save'>Сохранить</button>";
+                        echo "</td>";
                 echo "</tr>";      
 ?>
