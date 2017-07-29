@@ -33,6 +33,7 @@
 			    <input type="text" name="tf" class="time end" value="" />
 			</p>
 		</div>
+		</form>
 		<table class='table'>
 					<tr>
 						<th>ФИО</th>
