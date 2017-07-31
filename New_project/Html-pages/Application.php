@@ -1,4 +1,9 @@
 <?php
+	session_start();
+	if(!isset($_SESSION['username']) || !isset($_SESSION['password']))
+	{
+		header('Location: Authorization.php');
+	}
 	include_once('../PHP-scripts/connectScript.php');
 	$id = $_GET['id'];
 	$send = $_GET['s'];
@@ -70,6 +75,26 @@
 					$result = mysqli_fetch_assoc($query);
 					echo "<p class = 'add'>Заявка успешно отправлена</p>";
 					echo "<p class = 'add'>Код заявки: ".$result['id']."</p>";
+			?>
+					<script type="text/javascript">
+						function timer()
+						{
+							var obj=document.getElementById('timer_inp');
+							obj.innerHTML--;  
+							if(obj.innerHTML==0)
+							{
+							location.href='../PHP-scripts/exit.php';
+							setTimeout(function(){},1000);
+							}
+							else
+							{
+								setTimeout(timer,1000);
+							}
+						}
+						setTimeout(timer,1000);
+					</script>
+			<?php
+					echo "<div class = 'add'>Осталось <span  id='timer_inp' class = 'add'> 5 </span></div>";
 				}
 			?>
 			<div>
