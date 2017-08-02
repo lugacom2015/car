@@ -25,7 +25,7 @@ a:hover
 
 .mid
 {	
-	width: 1221px;
+	width: 1215px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 70px;
@@ -172,7 +172,7 @@ p
 	border-collapse: collapse;
 	text-align: center;
 	margin: auto;
-	width: 1221px;
+	width: 1215px;
 	max-height: 476px;
   	display: block;
   	overflow: auto;
@@ -184,7 +184,7 @@ th
 	background: #AFCDE7;
 	color: white;
 	padding: 10px 20px;
-	height: 34px;
+	height: 55px;
 }
 
 th, td 
@@ -197,7 +197,7 @@ th, td
 td 
 {
 	background: #D8E6F3;
-	min-height: 57px;
+	height: 60px;
 }
 
 th:first-child
@@ -241,25 +241,16 @@ textarea
 .saved
 {
 	margin: 0;
-	padding: 9px 20px;
+	padding: 10px 20px;
 	border-radius: 13em/3em;
 	font-size: 14px;
-	background: #32CD32;
+	background: #617a76;
 	border: 2px solid #fff;
 }
 
 .saved:hover
 {
-	border: 2px solid #32CD32;	
-}
-
-.save
-{
-	margin: 0;
-	padding: 9px 20px;
-	border-radius: 13em/3em;
-	font-size: 14px;
-	border: 2px solid #fff;
+	border: 2px solid #617a76;	
 }
 
 .savetd

@@ -1,4 +1,5 @@
 <?php
+		$idRequest = $resultRequestFirst['id'];
         $idUser = $resultRequestFirst['user'];
         $idDirection = $resultRequestFirst['destination'];
         $timeFrom = $resultRequestFirst['time_from'];
@@ -35,8 +36,9 @@
                         echo "<td>";
                         echo (substr($timeTo, 0, -3));
                         echo "</td>";
+						echo "<form action = '#' name='str' method='post' onsubmit = 'return false;'>";
                         echo "<td>";
-                        echo "<select name = 'car' class='car'>";
+                        echo "<select id = 'car".$idRequest."' name = 'car' class='car'>";
                                 echo "<option disabled selected = 'selected'>Выберите машину</option>";     
                                 $queryCar = mysqli_query($dbConnection, "SELECT * FROM car");                                    
                                 while ($resultCar = mysqli_fetch_assoc($queryCar)) 
@@ -46,7 +48,7 @@
                         echo "</select>";
                         echo "</td>";
                         echo "<td>";
-                        echo "<select name = 'driver' class='driver'>";
+                        echo "<select id = 'driver".$idRequest."' name = 'driver' class='driver'>";
                                 echo "<option disabled selected = 'selected'>Выберите водителя</option>";     
                                 $queryDriver= mysqli_query($dbConnection, "SELECT * FROM driver");                                    
                                 while ($resultDriver = mysqli_fetch_assoc($queryDriver)) 
@@ -56,14 +58,12 @@
                         echo "</select>";
                         echo "</td>";
                         echo "<td class = 'memo'>";
-                        echo "<textarea>";
+                        echo "<textarea id = 'desc".$idRequest."' name='desc'>";
                         echo "</textarea>";
                         echo "</td>";
                         echo "<td class = 'savetd'>";
-                       // if(/*Зявка не отредактирована*/)
-                                echo "<button type = 'submit' name = 'save' class = 'saved'disabled>Сохранено</button>";
-                        //else (/*Заявка отредактирована*/)
-                                //echo "<button type = 'submit' name = 'save' class = 'save'>Сохранить</button>";
+                               echo "<button id = '".$idRequest."' data-id = '".$idRequest."' type = 'submit' name = 'save' class = 'saved'>Сохранить</button>";
                         echo "</td>";
-                echo "</tr>";      
+                echo "</tr>";     
+				echo "</form>";
 ?>
