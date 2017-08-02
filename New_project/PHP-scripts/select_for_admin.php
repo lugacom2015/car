@@ -36,9 +36,9 @@
                         echo "<td>";
                         echo (substr($timeTo, 0, -3));
                         echo "</td>";
-						echo "<form action = '../php-scripts/requestEnd.php?id=".$idRequest."' name='str' method='post'>";
+						echo "<form action = '#' name='str' method='post' onsubmit = 'return false;'>";
                         echo "<td>";
-                        echo "<select name = 'car' class='car'>";
+                        echo "<select id = 'car".$idRequest."' name = 'car' class='car'>";
                                 echo "<option disabled selected = 'selected'>Выберите машину</option>";     
                                 $queryCar = mysqli_query($dbConnection, "SELECT * FROM car");                                    
                                 while ($resultCar = mysqli_fetch_assoc($queryCar)) 
@@ -48,7 +48,7 @@
                         echo "</select>";
                         echo "</td>";
                         echo "<td>";
-                        echo "<select name = 'driver' class='driver'>";
+                        echo "<select id = 'driver".$idRequest."' name = 'driver' class='driver'>";
                                 echo "<option disabled selected = 'selected'>Выберите водителя</option>";     
                                 $queryDriver= mysqli_query($dbConnection, "SELECT * FROM driver");                                    
                                 while ($resultDriver = mysqli_fetch_assoc($queryDriver)) 
@@ -58,7 +58,7 @@
                         echo "</select>";
                         echo "</td>";
                         echo "<td class = 'memo'>";
-                        echo "<textarea name='desc'>";
+                        echo "<textarea id = 'desc".$idRequest."' name='desc'>";
                         echo "</textarea>";
                         echo "</td>";
                         echo "<td class = 'savetd'>";
