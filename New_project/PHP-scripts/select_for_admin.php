@@ -38,7 +38,7 @@
                         echo "</td>";
 						echo "<form action = '#' name='str' method='post' onsubmit = 'return false;'>";
                         echo "<td>";
-                        echo "<select id = 'car".$idRequest."' name = 'car' class='car'>";
+                        echo "<select id = 'car".$idRequest."' name = 'car' class='car' required='required'>";
                                 echo "<option disabled selected = 'selected'>Выберите машину</option>";     
                                 $queryCar = mysqli_query($dbConnection, "SELECT * FROM car");                                    
                                 while ($resultCar = mysqli_fetch_assoc($queryCar)) 
@@ -48,7 +48,7 @@
                         echo "</select>";
                         echo "</td>";
                         echo "<td>";
-                        echo "<select id = 'driver".$idRequest."' name = 'driver' class='driver'>";
+                        echo "<select id = 'driver".$idRequest."' name = 'driver' class='driver' required='required'>";
                                 echo "<option disabled selected = 'selected'>Выберите водителя</option>";     
                                 $queryDriver= mysqli_query($dbConnection, "SELECT * FROM driver");                                    
                                 while ($resultDriver = mysqli_fetch_assoc($queryDriver)) 

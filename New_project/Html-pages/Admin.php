@@ -1,4 +1,3 @@
-
 <?php
 	session_start();
 	if(!isset($_SESSION['username']) || !isset($_SESSION['password']))
@@ -18,10 +17,8 @@
   	<link rel = "stylesheet" type="text/css" href = "../Css-files/jquery.timepicker.css" />
   	<script type = "text/javascript" src = "../Java_Script/JQuery/bootstrap-datepicker.js"></script>
   	<link rel="stylesheet" type="text/css" href="../Css-files/bootstrap-datepicker.css" />
-  	<script type = "text/javascript" src = "../Java_Script/JQuery/check.js"></script>
-  	<script type = "text/javascript" src = "../Java_Script/JQuery/jq.js"></script>
   	<script type="text/javascript">	
-		function funckSuccess(idRequest) 
+		function funckSuccess(idRequest,carId,driverId) 
 		{
 			$("#"+idRequest).css ("background", "#32CD32");
 			$("#"+idRequest).text ("Сохранено");
@@ -30,35 +27,116 @@
   				$(this).css("border", "2px solid #32CD32");
   				$(this).css("transition", "all 0.5s");
   				$(this).css("background", "#fff");
-  				$(this).css("color", "2px solid #32CD32");
+  				$(this).css("color", "#32CD32");
   			});
   			$("#"+idRequest).mouseout(function(event) 
 			{
 				$(this).css("background", "#32CD32");
 				$(this).css("transition", "all 1s");
-				$(this).children().css("border", "2px solid #fff");
+				$(this).css("border", "2px solid #fff");
+				$(this).css("color", "#fff");
 			});
 
-		}
+			$("#driver"+idRequest).change(function()
+			{
+				$("#"+idRequest).css ("background", "#617a76");
+				$("#"+idRequest).text ("Сохранить");
+				$("#"+idRequest).mouseover(function(event)
+				{
+	  				$(this).css("border", "2px solid #617a76");
+	  				$(this).css("transition", "all 0.5s");
+	  				$(this).css("background", "#fff");
+	  				$(this).css("color", "#617a76");
+	  			});
+	  			$("#"+idRequest).mouseout(function(event) 
+				{
+					$(this).css("background", "#617a76");
+					$(this).css("transition", "all 1s");
+					$(this).css("border", "2px solid #fff");
+					$(this).css("color", "#fff");
+				});
+			});
+
+			$("#car"+idRequest).change(function()
+			{
+				$("#"+idRequest).css ("background", "#617a76");
+				$("#"+idRequest).text ("Сохранить");
+				$("#"+idRequest).mouseover(function(event)
+				{
+	  				$(this).css("border", "2px solid #617a76");
+	  				$(this).css("transition", "all 0.5s");
+	  				$(this).css("background", "#fff");
+	  				$(this).css("color", "#617a76");
+	  			});
+	  			$("#"+idRequest).mouseout(function(event) 
+				{
+					$(this).css("background", "#617a76");
+					$(this).css("transition", "all 1s");
+					$(this).css("border", "2px solid #fff");
+					$(this).css("color", "#fff");
+				});	
+			});
+
+
+			var selectCar = document.getElementsByClassName('car');
+			for (var i = 0; i <= selectCar.length-1; i++)
+			{
+				var valueOptionCar = selectCar[i].value;
+				if(valueOptionCar != carId)
+				{
+					for (var j = 0; j <= selectCar[i].options.length-1; j++)
+					{
+						if (selectCar[i].options[j].value == carId) 
+						{
+							selectCar[i].remove(j);
+							break;
+						}
+					}
+				}
+			}
+			
+			var selectDriver = document.getElementsByClassName('driver');
+			for (i = 0; i <= selectDriver.length-1; i++)
+			{
+				var valueOptionDriver = selectDriver[i].value;
+				if(valueOptionDriver != driverId)
+				{
+					for (j = 0; j <= selectDriver[i].options.length-1; j++)
+					{
+						if (selectDriver[i].options[j].value == driverId) 
+						{
+							selectDriver[i].remove(j);
+							break;
+						}
+					}
+				}
+			}
+  		}
+
 		$(document).ready(function() 
 		{
-			$(".saved").bind("click",function(){
-			var idRequest = $(this).data('id');
-			var carId = document.getElementById('car' + idRequest).value;
-			var driverId = document.getElementById('driver' + idRequest).value;
-			var descId = document.getElementById('desc' + idRequest).value;
-			$.ajax ({
-					url: "../PHP-scripts/requestEnd.php",
-					type: "POST",
-					data: ({
-		    		car: carId, 
-		    		driver: driverId,
-		    		desc: descId,
-		   			id: idRequest
-						}),
-					dataType: "html",
-					success: funckSuccess(idRequest),
-				});
+			$(".saved").bind("click",function()
+			{
+				var idRequest = $(this).data('id');
+				var carId = document.getElementById('car' + idRequest).value;
+				var driverId = document.getElementById('driver' + idRequest).value;
+				var descId = document.getElementById('desc' + idRequest).value;
+				if(carId != "Выберите машину" && driverId != "Выберите водителя")
+				{	
+					$.ajax 
+					({
+						url: "../PHP-scripts/requestEnd.php",
+						type: "POST",
+						data: ({
+			    		car: carId, 
+			    		driver: driverId,
+			    		desc: descId,
+			   			id: idRequest
+							}),
+						dataType: "html",
+						success: funckSuccess(idRequest,carId,driverId)
+					});
+				}
 			});
 		});
 	</script>
@@ -89,7 +167,7 @@
 						<th>Сохранить</th>
 					</tr>
 					<?php
-		                 	$queryRequestFirst = mysqli_query($dbConnection, "SELECT * FROM request_first");
+		                 	$queryRequestFirst = mysqli_query($dbConnection, "SELECT * FROM request_first WHERE view = 0");
 		                     while ($resultRequestFirst = mysqli_fetch_array($queryRequestFirst)) 
 		                     {
 	           					require '../PHP-scripts/select_for_admin.php';  
