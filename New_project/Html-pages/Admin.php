@@ -5,7 +5,6 @@
 		header('Location: Authorization.php');
 	}
 	include_once('../PHP-scripts/connectScript.php');
-	$ms = 0;
 	$ms = $_GET['ms'];
 	$message_1 = 0;
 	$message_2 = 1;
@@ -32,7 +31,6 @@
 	  		{	  		
 	  			var date = new Date(selectTime[i].innerHTML);
 	  			var valueOptionCar = selectCar[i].value;
-	  			var valueOptionDriver = selectDriver[i].value;
 	  			for (var j = 0; j <= selectCar[i].options.length-1; j++)
 	  			{
 	  				for(var row = 0; row < myMatrix.length; row++)
@@ -46,6 +44,21 @@
 	  								selectCar[i].remove(j);
 	  							}
 	  						}
+	  					}
+	  				}
+	  			}
+	  		}
+
+	  		for(var i = 0; i < selectDriver.length; i++)
+	  		{	  		
+	  			var date = new Date(selectTime[i].innerHTML);
+	  			var valueOptionDriver = selectDriver[i].value;
+	  			for (var j = 0; j <= selectDriver[i].options.length-1; j++)
+	  			{
+	  				for(var row = 0; row < myMatrix.length; row++)
+	  				{
+	  					for(var col = 0; col < myMatrix[0].length-4; col++)
+	  					{
 	  						if (selectDriver[i].options[j].value == myMatrix[row][col + 2] && myMatrix[row][col + 2] != valueOptionDriver) 
 	  						{
 	  							if(date < myMatrix[row][col + 4])
@@ -126,16 +139,46 @@
 
 		function addCar(matrixOptionCar,matrixTextOptionCar,row)
 		{
+			var check = 0;
 			var selectCar = document.getElementsByClassName('car');
 			for(var i = 0; i < selectCar.length; i++)
 			{
-				if(i != row)
+				for (var num = 0; num <= selectCar[i].options.length-1; num++)
+				{
+					if(selectCar[i].options[num].value == matrixOptionCar)
+					{
+						check = 1;
+						break;
+					}
+				}
+				if(i != row && check != 1)
 				{
 					var newOption = new Option(matrixTextOptionCar, matrixOptionCar);
 					selectCar[i].appendChild(newOption);
 				}
 			}
+		}
 
+		function addDriver(matrixOptionDriver,matrixTextOptionDriver,row)
+		{
+			var check = 0;
+			var selectDriver = document.getElementsByClassName('driver');
+			for(var i = 0; i < selectDriver.length; i++)
+			{
+				for (var num = 0; num <= selectDriver[i].options.length-1; num++)
+				{
+					if(selectDriver[i].options[num].value == matrixOptionDriver)
+					{
+						check = 1;
+						break;
+					}
+				}
+				if(i != row && check != 1)
+				{
+					var newOption = new Option(matrixTextOptionDriver, matrixOptionDriver);
+					selectDriver[i].appendChild(newOption);
+				}
+			}
 		}
 
 		function funckSuccess(idRequest,carId,driverId,ms,myMatrix) 
@@ -145,6 +188,7 @@
 				document.getElementById(idRequest).disabled = true;
 				document.getElementById("driver"+idRequest).disabled = true;
 				document.getElementById("car"+idRequest).disabled = true;
+				document.getElementById("desc"+idRequest).disabled = true;
 			}
 
 			$("#"+idRequest).css ("background", "#32CD32");
@@ -262,17 +306,63 @@
 
 			$(".car").change(function()
 			{
-				var selectCar = document.getElementsByClassName('car');
-				for(var i = 0; i < selectCar.length; i++)
+				if(ms == 1)
 				{
-					var valueOptionCar = selectCar[i].value;
-					for(var col = 0; col < myMatrix[0].length-4; col++)
-					{	
-						if(myMatrix[i][col] != valueOptionCar)
+					var selectCar = document.getElementsByClassName('car');
+					for(var i = 0; i < selectCar.length; i++)
+					{
+						var valueOptionCar = selectCar[i].value;
+						for (var num = 0; num <= selectCar[i].options.length-1; num++)
 						{
-							var matrixOptionCar = myMatrix[i][col];
-							var matrixTextOptionCar = myMatrix[i][col + 1];
-							addCar(matrixOptionCar,matrixTextOptionCar,valueOptionCar,i);
+							if(selectCar[i].options[num].value == valueOptionCar)
+							{
+								var textOptionCar = selectCar[i].options[num].text;
+								break;
+							}
+						}
+						for(var col = 0; col < myMatrix[0].length-4; col++)
+						{	
+							if(myMatrix[i][col] != valueOptionCar)
+							{
+								var matrixOptionCar = myMatrix[i][col];
+								var matrixTextOptionCar = myMatrix[i][col + 1];
+								addCar(matrixOptionCar,matrixTextOptionCar,i);
+								myMatrix[i][col] = valueOptionCar;
+								myMatrix[i][col + 1] = textOptionCar;
+								selectCarDriver(myMatrix);
+							}
+						}
+					}
+				}
+			});
+
+			$(".driver").change(function()
+			{
+				if(ms == 1)
+				{
+					var selectDriver = document.getElementsByClassName('driver');
+					for(var i = 0; i < selectDriver.length; i++)
+					{
+						var valueOptionDriver = selectDriver[i].value;
+						for (var num = 0; num <= selectDriver[i].options.length-1; num++)
+						{
+							if(selectDriver[i].options[num].value == valueOptionDriver)
+							{
+								var textOptionDriver = selectDriver[i].options[num].text;
+								break;
+							}
+						}
+						for(var col = 0; col < myMatrix[0].length-4; col++)
+						{	
+							if(myMatrix[i][col + 2] != valueOptionDriver)
+							{
+								var matrixOptionDriver = myMatrix[i][col + 2];
+								var matrixTextOptionDriver = myMatrix[i][col + 3];
+								addDriver(matrixOptionDriver,matrixTextOptionDriver,i);
+								myMatrix[i][col + 2] = valueOptionDriver;
+								myMatrix[i][col + 3] = textOptionDriver;
+								selectCarDriver(myMatrix);
+							}
 						}
 					}
 				}
