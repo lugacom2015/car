@@ -2,6 +2,7 @@
     session_start();
 	include "connectScript.php";
     $send = 0;
+    $message = 0;
     $authQuery=$dbConnection
         //запрос на выборку из БД, имена таблиц и полей не конечные и могут изменяться
         ->query("SELECT id,password,admin FROM user WHERE login='".$_POST["username"]."'");
@@ -19,7 +20,7 @@
         {
             $_SESSION['username'] = $_POST["username"];
             $_SESSION['password'] = $_POST["password"];
-            header("Location: ../html-pages/Admin.php");
+            header("Location: ../html-pages/Admin.php?ms=".$message);
             exit;
         }
     }

@@ -1,188 +1,360 @@
-<? PHP
-session_start ();
-	If ( ! Isset ( $ _SESSION [ ' username ' ]) ||  ! Isset ( $ _SESSION [ ' password ' ]))
+<?php
+	session_start();
+	if(!isset($_SESSION['username']) || !isset($_SESSION['password']))
 	{
-		Header ( ' Location: Authorization.php ' );
+		header('Location: Authorization.php');
 	}
-	include_once ( ' ../PHP-scripts/connectScript.php ' );
-? >
-< Html >
-< Head >
-	< Название > Страница администратора </ название >
-	< Meta  http-equiv = " Content-Type "  content = " text / html "  charset = " UTF-8 " >
-	< Link  rel = " stylesheet "  type = " text / css "  href = " ../Css-files/Admin.css "  media = " all " >	
-	< Link  rel = " stylesheet "  type = " text / css "  href = " ../Css-files/table.css "  media = " all " >	
-	< Script  src = " https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js " > < / script >
-  	< Script  type = " text / javascript "  src = " ../Java_Script / JQuery / jquery.timepicker.js " > < / script >
-  	< Link  rel = " stylesheet "  type = " text / css "  href = " ../Css-files/jquery.timepicker.css " />
-  	< Script  type = " text / javascript "  src = " ../Java_Script / JQuery / bootstrap-datepicker.js " > < / script >
-  	< Link  rel = " stylesheet "  type = " text / css "  href = " ../Css-files/bootstrap-datepicker.css " />
-  	< Script  type = " text / javascript " >	
-		Функция  funckSuccess ( idRequest , carId , driverId )
+	include_once('../PHP-scripts/connectScript.php');
+	$ms = 0;
+	$ms = $_GET['ms'];
+	$message_1 = 0;
+	$message_2 = 1;
+?>
+<html>
+<head>
+	<title>Страница администратора</title>
+	<meta http-equiv="Content-Type" content="text/html" charset = "UTF-8">
+	<link rel = "stylesheet" type = "text/css" href = "../Css-files/Admin.css" media = "all">	
+	<link rel = "stylesheet" type = "text/css" href = "../Css-files/table.css" media = "all">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script type = "text/javascript" src = "../Java_Script/JQuery/jquery.timepicker.js"></script>
+  	<link rel = "stylesheet" type="text/css" href = "../Css-files/jquery.timepicker.css" />
+  	<script type = "text/javascript" src = "../Java_Script/JQuery/bootstrap-datepicker.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../Css-files/bootstrap-datepicker.css" />
+  	<script type="text/javascript">	
+
+	  	function selectCarDriver(myMatrix)
+	  	{
+	  		var selectCar = document.getElementsByClassName('car');
+	  		var selectDriver = document.getElementsByClassName('driver');
+	  		var selectTime = document.getElementsByClassName('dateFirst');
+	  		for(var i = 0; i < selectCar.length; i++)
+	  		{	  		
+	  			var date = new Date(selectTime[i].innerHTML);
+	  			var valueOptionCar = selectCar[i].value;
+	  			var valueOptionDriver = selectDriver[i].value;
+	  			for (var j = 0; j <= selectCar[i].options.length-1; j++)
+	  			{
+	  				for(var row = 0; row < myMatrix.length; row++)
+	  				{
+	  					for(var col = 0; col < myMatrix[0].length-4; col++)
+	  					{
+	  						if (selectCar[i].options[j].value == myMatrix[row][col] && myMatrix[row][col] != valueOptionCar) 
+	  						{
+	  							if(date < myMatrix[row][col + 4])
+	  							{
+	  								selectCar[i].remove(j);
+	  							}
+	  						}
+	  						if (selectDriver[i].options[j].value == myMatrix[row][col + 2] && myMatrix[row][col + 2] != valueOptionDriver) 
+	  						{
+	  							if(date < myMatrix[row][col + 4])
+	  							{
+	  								selectDriver[i].remove(j);
+	  							}
+	  						}
+	  					}
+	  				}
+	  			}
+	  		}
+	  	}	  
+
+  		function matrixArray(rows)
+  		{
+  			var selectCar = document.getElementsByClassName('car');
+  			var selectDriver = document.getElementsByClassName('driver');
+  			var selectTime = document.getElementsByClassName('dateEnd');
+	  		var arr = new Array();
+	  		for(var i=0; i<selectCar.length; i++)
+	  		{
+		    	arr[i] = new Array();
+		    	for(var j=0; j<rows; j++)
+	    		{
+	    			if(j == 0)
+	      				arr[i][j] = selectCar[i].value;
+
+	      			else if(j == 1)
+	      			{
+	      				for (var num = 0; num <= selectCar[i].options.length-1; num++)
+						{
+							if(selectCar[i].options[num].value == selectCar[i].value)
+							{
+								arr[i][j] = selectCar[i].options[num].text;
+								break;
+							}
+						}
+	      			}
+
+	      			else if(j == 2)
+	      				arr[i][j] = selectDriver[i].value;
+
+	      			else if(j == 3)
+	      			{
+	      				for (var num = 0; num <= selectDriver[i].options.length-1; num++)
+						{
+							if(selectDriver[i].options[num].value == selectDriver[i].value)
+							{
+								arr[i][j] = selectDriver[i].options[num].text;
+								break;
+							}
+						}
+	      			}
+
+	      			else
+	      			{
+	      				date = new Date(selectTime[i].innerHTML);
+	      				date.setMinutes(date.getMinutes() + 30);
+	      				arr[i][j] = date;	
+	      			}
+	      				
+	    		}
+	  		}
+	  		return arr;
+		}
+
+		function alertMatrix(myMatrix)
 		{
-			$ ( " # " + IdRequest). Css ( « фон » , « # 32CD32 » );
-			$ ( " # " + IdRequest). Текст ( « Сохранено » );
-			$ ( " # " + IdRequest). Mouseover ( функция ( событие )
+			var selectCar = document.getElementsByClassName('car');
+			for(var i=0; i<selectCar.length; i++)
 			{
-  				$ ( Это ). Css ( " border " , " 2px solid # 32CD32 " );
-  				$ ( Это ). Css ( « переход » , « все 0,5 с » );
-  				$ ( Это ). Css ( « фон » , « #fff » );
-  				$ ( Это ). Css ( « цвет » , « # 32CD32 » );
+				for(var j = 0; j < 5; j++)
+				{
+					alert(myMatrix[i][j]);
+				}	
+			}
+		}
+
+		function addCar(matrixOptionCar,matrixTextOptionCar,row)
+		{
+			var selectCar = document.getElementsByClassName('car');
+			for(var i = 0; i < selectCar.length; i++)
+			{
+				if(i != row)
+				{
+					var newOption = new Option(matrixTextOptionCar, matrixOptionCar);
+					selectCar[i].appendChild(newOption);
+				}
+			}
+
+		}
+
+		function funckSuccess(idRequest,carId,driverId,ms,myMatrix) 
+		{
+			if(ms == 0)
+			{
+				document.getElementById(idRequest).disabled = true;
+				document.getElementById("driver"+idRequest).disabled = true;
+				document.getElementById("car"+idRequest).disabled = true;
+			}
+
+			$("#"+idRequest).css ("background", "#32CD32");
+			$("#"+idRequest).text ("Сохранено");			
+			$("#"+idRequest).mouseover(function(event)
+			{
+  				$(this).css("border", "2px solid #32CD32");
+  				$(this).css("transition", "all 0.5s");
+  				$(this).css("background", "#fff");
+  				$(this).css("color", "#32CD32");
   			});
-  			$ ( " # " + IdRequest). Mouseout ( функция ( событие )
+
+  			$("#"+idRequest).mouseout(function(event) 
 			{
-				$ ( Это ). Css ( « фон » , « # 32CD32 » );
-				$ ( Это ). Css ( « переход » , « все 1s » );
-				$ ( Это ). Css ( " border " , " 2px solid #fff " );
-				$ ( Это ). Css ( « цвет » , « #fff » );
+				$(this).css("background", "#32CD32");
+				$(this).css("transition", "all 1s");
+				$(this).css("border", "2px solid #fff");
+				$(this).css("color", "#fff");
 			});
-			$ ( " #driver " + idRequest). Change ( function ()
+
+			$("#driver"+idRequest).change(function()
 			{
-				$ ( " # " + IdRequest). Css ( « фон » , « # 617a76 » );
-				$ ( " # " + IdRequest). Текст ( « Сохранить » );
-				$ ( " # " + IdRequest). Mouseover ( функция ( событие )
+				$("#"+idRequest).css ("background", "#617a76");
+				$("#"+idRequest).text ("Сохранить");
+				$("#"+idRequest).mouseover(function(event)
 				{
-	  				$ ( Это ). Css ( « граница » , « 2px solid # 617a76 » );
-	  				$ ( Это ). Css ( « переход » , « все 0,5 с » );
-	  				$ ( Это ). Css ( « фон » , « #fff » );
-	  				$ ( Это ). Css ( « цвет » , « # 617a76 » );
+	  				$(this).css("border", "2px solid #617a76");
+	  				$(this).css("transition", "all 0.5s");
+	  				$(this).css("background", "#fff");
+	  				$(this).css("color", "#617a76");
 	  			});
-	  			$ ( " # " + IdRequest). Mouseout ( функция ( событие )
+	  			$("#"+idRequest).mouseout(function(event) 
 				{
-					$ ( Это ). Css ( « фон » , « # 617a76 » );
-					$ ( Это ). Css ( « переход » , « все 1s » );
-					$ ( Это ). Css ( " border " , " 2px solid #fff " );
-					$ ( Это ). Css ( « цвет » , « #fff » );
+					$(this).css("background", "#617a76");
+					$(this).css("transition", "all 1s");
+					$(this).css("border", "2px solid #fff");
+					$(this).css("color", "#fff");
 				});
 			});
-			$ ( " #car " + idRequest). Change ( function ()
+
+			$("#car"+idRequest).change(function()
 			{
-				$ ( " # " + IdRequest). Css ( « фон » , « # 617a76 » );
-				$ ( " # " + IdRequest). Текст ( « Сохранить » );
-				$ ( " # " + IdRequest). Mouseover ( функция ( событие )
+				$("#"+idRequest).css ("background", "#617a76");
+				$("#"+idRequest).text ("Сохранить");
+				$("#"+idRequest).mouseover(function(event)
 				{
-	  				$ ( Это ). Css ( « граница » , « 2px solid # 617a76 » );
-	  				$ ( Это ). Css ( « переход » , « все 0,5 с » );
-	  				$ ( Это ). Css ( « фон » , « #fff » );
-	  				$ ( Это ). Css ( « цвет » , « # 617a76 » );
+	  				$(this).css("border", "2px solid #617a76");
+	  				$(this).css("transition", "all 0.5s");
+	  				$(this).css("background", "#fff");
+	  				$(this).css("color", "#617a76");
 	  			});
-	  			$ ( " # " + IdRequest). Mouseout ( функция ( событие )
+	  			$("#"+idRequest).mouseout(function(event) 
 				{
-					$ ( Это ). Css ( « фон » , « # 617a76 » );
-					$ ( Это ). Css ( « переход » , « все 1s » );
-					$ ( Это ). Css ( " border " , " 2px solid #fff " );
-					$ ( Это ). Css ( « цвет » , « #fff » );
+					$(this).css("background", "#617a76");
+					$(this).css("transition", "all 1s");
+					$(this).css("border", "2px solid #fff");
+					$(this).css("color", "#fff");
 				});	
 			});
-			вар selectCar =  документ . GetElementsByClassName ( ' автомобиль ' );
-			для ( вар я =  0 ; я <=  selectCar . Длина - 1 ; я ++ )
-			{
-				вар valueOptionCar = selectCar [I]. Стоимость ;
-				If (valueOptionCar ! = CarId)
-				{
-					для ( вар J =  0 ; J <= selectCar [I]. Варианты . Длина - 1 ; J ++ )
-					{
-						If (selectCar [i]. Options [j]. Значение  == carId)
-						{
-							selectCar [I]. Удалить (j);
-							Перерыв ;
-						}
-					}
-				}
-			}
-			
-			вар selectDriver =  документ . GetElementsByClassName ( ' driver ' );
-			для (я =  0 ; я <=  selectDriver . Длина - 1 ; я ++ )
-			{
-				вар valueOptionDriver = selectDriver [I]. Стоимость ;
-				If (valueOptionDriver ! = DriverId)
-				{
-					для (J =  0 ; J <= selectDriver [I]. Варианты . Длина - 1 ; J ++ )
-					{
-						If (selectDriver [i]. Options [j]. Value  == driverId)
-						{
-							selectDriver [I]. Удалить (j);
-							Перерыв ;
-						}
-					}
-				}
-			}
   		}
-		$ ( Документ ). Ready ( функция ()
+
+		$(document).ready(function() 
 		{
-			$ ( " .saved " ). Bind ( " click " , function ()
+			var ms = <?php echo $ms ?>;
+			var myMatrix = matrixArray(5);
+			if(ms == 1)
 			{
-				вар idRequest =  $ ( это ). Данные ( ' id ' );
-				вар carId =  документ . GetElementById ( ' car '  + idRequest). Стоимость ;
-				вар driverId =  документ . GetElementById ( ' driver '  + idRequest). Стоимость ;
-				вар descId =  документ . GetElementById ( ' desc '  + idRequest). Стоимость ;
-				If (carId ! =  " Выбрать машину "  && driverId ! =  " Выбрать водителя " )
-				{	
-					$ . Аякса 
+				//alertMatrix(myMatrix);
+				selectCarDriver(myMatrix);
+				$(".saved").bind("click",function()
+				{
+					var idRequest = $(this).data('id');
+					var carId = document.getElementById('car' + idRequest).value;
+					var driverId = document.getElementById('driver' + idRequest).value;
+					var descId = document.getElementById('desc' + idRequest).value;	
+					$.ajax 
 					({
-						Url :  " ../PHP-scripts/requestEnd.php " ,
-						Тип :  « POST » ,
-						Данные : ({
-			    		Автомобиль : carId,
-			    		Driver : driverId,
-			    		по убыванию : descId,
-			   			Id : idRequest
+						url: "../PHP-scripts/requestEnd.php",
+						type: "POST",
+						data: ({
+			    		car: carId, 
+			    		driver: driverId,
+			    		desc: descId,
+			   			id: idRequest
 							}),
-						DataType :  " html " ,
-						Успех :  funckSuccess (idRequest, carId, driverId)
+						dataType: "html",
+						success: funckSuccess(idRequest,carId,driverId,ms,myMatrix) 
+					});
+				});
+			}
+
+			$(".save").bind("click",function()
+			{
+				var idRequest = $(this).data('id');
+				var carId = document.getElementById('car' + idRequest).value;
+				var driverId = document.getElementById('driver' + idRequest).value;
+				var descId = document.getElementById('desc' + idRequest).value;
+				if(carId != "Выберите машину" && driverId != "Выберите водителя")
+				{	
+					$.ajax 
+					({
+						url: "../PHP-scripts/requestEnd.php",
+						type: "POST",
+						data: ({
+			    		car: carId, 
+			    		driver: driverId,
+			    		desc: descId,
+			   			id: idRequest
+							}),
+						dataType: "html",
+						success: funckSuccess(idRequest,carId,driverId,ms,myMatrix)
 					});
 				}
 			});
+
+			$(".car").change(function()
+			{
+				var selectCar = document.getElementsByClassName('car');
+				for(var i = 0; i < selectCar.length; i++)
+				{
+					var valueOptionCar = selectCar[i].value;
+					for(var col = 0; col < myMatrix[0].length-4; col++)
+					{	
+						if(myMatrix[i][col] != valueOptionCar)
+						{
+							var matrixOptionCar = myMatrix[i][col];
+							var matrixTextOptionCar = myMatrix[i][col + 1];
+							addCar(matrixOptionCar,matrixTextOptionCar,valueOptionCar,i);
+						}
+					}
+				}
+			});
 		});
-	< / Script >
-</ Head >
-< Body >
-	< Div  class = " mid " >
-		< Форма  действия = " <PHP? Эхо $ _SERVER [ ' PHP_SELF ' ]; ? > "    Имя = " админ "  метод = " пост " >
-		< Div >
-			< P  id = " datepairExample " >
-			    < Input  type = " text "  name = " ds "  class = " date start "  value = " " />
-			    < Input  type = " text "  name = " ts "  class = " time start "  value = " " />
-			    < Button  type = " submit "  name = " search " > Поиск </ button >
-			    < Input  type = " text "  name = " df "  class = " date end "  value = " " />
-			    < Input  type = " text "  name = " tf "  class = " time end "  value = " " />
-			</ P >
-		</ Div >
-		</ Form >
-		< Table  class = ' table ' >
-					< Tr >
-						< Th > ФИО </ th >
-						< Th > Откуда </ th >
-						< Th > Куда </ th >
-						< Th > Дата / Время с </ th >
-						< Th > Дата / Время по </ th >
-						< Th > Машина </ th >
-						< Th > Водитель </ th >
-						< Th > Примечание </ th >
-						< Th > Сохранить </ th >
-					</ Tr >
-					<? PHP
-		                 	$ QueryRequestFirst  =  mysqli_query ( $ dbConnection , " SELECT  *  FROM request_first WHERE view =  0 " );
-		                     в то время как ( $ resultRequestFirst  =  mysqli_fetch_array ( $ queryRequestFirst ))
-		                     {
-	           					требуется  ' ../PHP-scripts/select_for_admin.php ' ;  
-		                     }		           
-					? >
-		</ Table >
-		<! - <button type = "submit" name = "save" class = "save"> Сохранить </ button> ->
-		< Script >
-	    		$ ( ' #datepairExample .time ' ). Timepicker ({
-	       		 	' ShowDuration ' :  true ,
-	      	     	' TimeFormat ' :  ' H: i ' ,
-	      	     	« Шаг » :  15
+
+	</script>
+</head>
+<body>
+	<div class = "mid">
+		<form action = "<?php echo $_SERVER['PHP_SELF']; ?>" name="admin" method="post">
+		<div>
+			<p class="llink">
+			<?php
+				if($ms == 0)
+				{
+					echo '<a href=Admin.php?ms='.$message_2.'><label class=ledit>Редактировать </label></a>';
+					echo '<a href=Admin.php?ms='.$message_1.'><label class=lconsred>Рассмотреть </label></a>';
+				}
+				else if($ms == 1)
+				{
+					echo '<a href=Admin.php?ms='.$message_2.'><label class=leditred>Редактировать </label></a>';
+					echo '<a href=Admin.php?ms='.$message_1.'><label class=lcons>Рассмотреть </label></a>';
+				}
+			?>
+			</p>
+			<p id="datepairExample">
+			    <input type="text" name="ds" class="date start" value="" />
+			    <input type="text" name="ts" class="time start" value="" /> 
+			    <button type = "submit" name = "search">Поиск</button>
+			    <input type="text" name="df" class="date end" value="" />
+			    <input type="text" name="tf" class="time end" value="" />
+			</p>
+		</div>
+		</form>
+		<table class='table' id="table">
+					<tr>
+						<th>ФИО</th>
+						<th>Откуда</th>
+						<th>Куда</th>
+						<th>Дата/Время с</th>
+						<th>Дата/Время по</th>
+						<th>Машина</th>
+						<th>Водитель</th>
+						<th>Примечание</th>
+						<th>Сохранить</th>
+					</tr>
+					<?php
+							if($ms == 0)
+							{
+		                 		$queryRequestFirst = mysqli_query($dbConnection, "SELECT * FROM request_first WHERE view = 0");
+		                 		while ($resultRequestFirst = mysqli_fetch_array($queryRequestFirst)) 
+			                    {
+		           					require '../PHP-scripts/select_for_admin.php';  
+			                    }		  
+							}
+		                 	else if($ms == 1)
+		                 	{
+			                 	$queryRequestFirst = mysqli_query($dbConnection, "SELECT * FROM request_first WHERE view = 1");
+			                    while ($resultRequestFirst = mysqli_fetch_array($queryRequestFirst)) 
+			                    {
+			                     	$queryCheckRequestEnd =  mysqli_query($dbConnection, "SELECT * FROM request_end WHERE request_first =".$resultRequestFirst['id']);
+									if(mysqli_num_rows($queryCheckRequestEnd) > 0)	
+		           						require '../PHP-scripts/select_for_admin.php';  
+			                    }		  
+		                    }         
+					?>
+		</table>
+		<!--<button type = "submit" name = "save" class="save">Сохранить</button>-->
+		<script>
+	    		$('#datepairExample .time').timepicker({
+	       		 	'showDuration': true,
+	      	     	'timeFormat': 'H:i',
+	      	     	'step': 15
 	    		});
-			    $ ( ' #datepairExample .date ' ). Datepicker ({
-			        ' Format ' :  ' yyyy-md ' ,
-			        ' Autoclose ' :  true
+			    $('#datepairExample .date').datepicker({
+			        'format': 'yyyy-m-d',
+			        'autoclose': true
 			    });			    
-	    		$ ( ' #datepairExample ' ). Datepair ();
-			< / Script >
-		</ Form >	
-	</ Div >
-</ Body >
-</ Html >
+	    		$('#datepairExample').datepair();
+			</script>
+		</form>	
+	</div>
+</body>
+</html>

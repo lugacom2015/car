@@ -111,6 +111,67 @@ input:hover
 	margin-left: 10px;
 }
 
+.ledit
+{
+	float: left;
+	color: black;
+	transition: all 0.5s;
+}
+
+.lcons
+{
+	float: right;
+	color: black;
+	transition: all 0.5s;
+}
+
+.lconsred
+{
+	float: right;
+	color: #B22222;
+	transition: all 0.5s;
+}
+
+.lconsred:hover
+{
+	color: #B0C4DE;
+	transition: all 1s;
+	cursor: pointer;
+}
+
+.leditred
+{
+	float: left;
+	color: #B22222;
+	transition: all 0.5s;
+}
+
+.leditred:hover
+{
+	color: #B0C4DE;
+	transition: all 1s;
+	cursor: pointer;
+}
+
+.llink
+{
+	padding-bottom: 5px;
+}
+
+.lcons:hover
+{
+	color: #B0C4DE;
+	transition: all 1s;
+	cursor: pointer;
+}
+
+.ledit:hover
+{
+	color: #B0C4DE;
+	transition: all 1s;
+	cursor: pointer;
+}
+
 .time
 {
 	width: 100px;
@@ -225,6 +286,11 @@ textarea
 
 }
 
+#datepairExample
+{
+	margin-top: 0;
+}
+
 .car,.driver
 {
 	width: 180px;
@@ -244,13 +310,23 @@ textarea
 	padding: 10px 20px;
 	border-radius: 13em/3em;
 	font-size: 14px;
-	background: #617a76;
+	background: #32CD32;
 	border: 2px solid #fff;
+}
+
+.save
+{
+	margin: 0;
+	padding: 10px 20px;
+	border-radius: 13em/3em;
+	font-size: 14px;
+	background: #617a76;
+	border: 2px solid #fff;	
 }
 
 .saved:hover
 {
-	border: 2px solid #617a76;	
+	border: 2px solid #32CD32;	
 }
 
 .savetd
